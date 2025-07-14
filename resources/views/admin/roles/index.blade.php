@@ -7,7 +7,7 @@
 @section('header')
   <div class="d-flex align-items-center justify-content-between mb-4">
     <h1 class="h3">{{ __('Manage Roles') }}</h1>
-    <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.create')}}" class="btn btn-primary">
+    <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.create') : '#'}}" class="btn btn-primary">
       <i class="fas fa-plus"></i>
       <span class="ps-1">{{ __('Add new') }}</span>
     </a>
@@ -51,16 +51,22 @@
                 </td>
                 <td class="d-none d-md-table-cell">{{ $role->created_at->diffforhumans() }}</td>
                 <td width="90px">
-                  <form action="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.edit', $role->id)  }}" method="post">
+                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.edit', $role->id) : '#'  }}" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  @if(Auth::user()->role->slug === 'super-admin')
+                  <form action="{{ route('roles.destroy', $role->id) }}" method="post" style="display:inline;">
                     @csrf
                     @method("delete")
-                    <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.destroy', $role->id)  }}" class="btn btn-outline-primary btn-sm">
-                      <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="#" class="btn btn-outline-danger btn-sm" onclick="del(event, this)" >
+                    <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this role?')">
                       <i class="fas fa-trash-alt"></i>
-                    </a>
+                    </button>
                   </form>
+                  @else
+                  <button class="btn btn-outline-danger btn-sm" disabled>
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  @endif
                 </td>
               </tr>
             @empty
