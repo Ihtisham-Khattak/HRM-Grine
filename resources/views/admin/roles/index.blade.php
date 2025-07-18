@@ -7,7 +7,7 @@
 @section('header')
   <div class="d-flex align-items-center justify-content-between mb-4">
     <h1 class="h3">{{ __('Manage Roles') }}</h1>
-    <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.create') : '#'}}" class="btn btn-primary">
+    <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.create')}}" class="btn btn-primary">
       <i class="fas fa-plus"></i>
       <span class="ps-1">{{ __('Add new') }}</span>
     </a>
