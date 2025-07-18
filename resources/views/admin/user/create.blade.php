@@ -11,7 +11,7 @@
 @section('content')
   <section class="row">
     <div class="col-12 d-flex align-items-center justify-content-center">
-      <div class="col-6">
+      <div class="col-12">
         <form action="{{ Auth::user()->role->slug === 'super-admin' ? route('user.store') : route('admin.user.store') }}" method="post">
           @csrf
           <div class="card flex-fill">
@@ -54,14 +54,14 @@
               </div>
             </div>
             <div class="card-footer">
-              <div class="row">
-                <div class="col-6 d-grid">
+              <div class="row d-flex flex-direction-col gap-2">
+                <div class="col-6">
                   <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('user.index') : route('admin.user.index')}}" class="btn btn-outline-secondary" >
                     <i class="align-middle me-1" data-feather="arrow-left"></i>
                     <span class="ps-1">{{ __('Discard') }}</span>
                   </a>
                 </div>
-                <div class="col-6 d-grid">
+                <div class="col-6">
                   <button type="submit" class="btn btn-outline-secondary" >
                     <i class="align-middle me-1" data-feather="plus"></i>
                     <span class="ps-1">{{ __('Create New') }}</span>
