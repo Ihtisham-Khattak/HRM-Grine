@@ -18,9 +18,7 @@
   <section class="card">
     <div class="card-body">
       <div class="m-sm-4">
-        <div class="text-center">
-          <img src="{{asset('img/avatars/dummy.png')}}" alt="Charles Hall" class="img-fluid rounded-circle" width="132" height="132" />
-        </div>
+       
         <form method="POST" action="{{ route('login') }}">
           @csrf
           <div class="mb-3">
