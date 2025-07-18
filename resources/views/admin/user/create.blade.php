@@ -36,13 +36,14 @@
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <input type="password" name="password" class="form-control" id="slug"
+                                
                                     placeholder="{{ __('Password') }}" value="{{ old('password') }}" />
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <input type="password" name="cpass" class="form-control" id="slug"
                                     placeholder="{{ __('Confirm password') }}" value="{{ old('confirm password') }}" />
                             </div>
-                            <div class="col-md-12 col-lg-6">
+                            <div class="col-md-6 col-lg-6">
                                 <select name="role_id" class="form-control" id="role">
                                     <option value="">{{ __('-- User Role --') }}</option>
                                     @foreach ($roles as $role)
