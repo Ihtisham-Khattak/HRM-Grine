@@ -30,13 +30,12 @@
                             <div class="col-12">
                                 <input type="tel" name="phone" class="form-control" id="phone"
                                     placeholder="{{ __('Primary Phone') }}" value="{{ old('phone') }}" required
-                                    oninput="formatPhoneNumber(this)" maxlength="19" />
-                                {{-- <input type="text" name="phone" class="form-control" id="slug" placeholder="{{ __('Phone') }}"
-                                value="{{ old('phone') }}" /> --}}
+                                    oninput="formatPhoneNumber(this) " maxlength="19" />
+                                <input type="text" name="phone" class="form-control" id="slug"
+                                    placeholder="{{ __('Phone') }}" value="{{ old('phone') }}" />
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <input type="password" name="password" class="form-control" id="slug"
-                                
                                     placeholder="{{ __('Password') }}" value="{{ old('password') }}" />
                             </div>
                             <div class="col-md-6 col-lg-6">
@@ -64,18 +63,18 @@
                         <div class="d-flex flex-md-row flex-column gap-2">
 
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-success w-100">
-                                    <i class="align-middle me-1" data-feather="plus"></i>
-                                    <span class="ps-1">{{ __('Create New') }}</span>
-                                </button>
-                            </div>
-
-                            <div class="col-md-6">
                                 <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('user.index') : route('admin.user.index') }}"
                                     class="btn btn-danger w-100">
                                     <i class="align-middle me-1" data-feather="arrow-left"></i>
                                     <span class="ps-1">{{ __('Cancel') }}</span>
                                 </a>
+                            </div>
+
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="align-middle me-1" data-feather="plus"></i>
+                                    <span class="ps-1">{{ __('Create New') }}</span>
+                                </button>
                             </div>
                         </div>
                     </div>

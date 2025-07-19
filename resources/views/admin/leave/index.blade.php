@@ -11,7 +11,7 @@
     <div class="col-12">
         <div class="card-header flex-fill">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-3">Manage Leaves</h1>
+                <h1 class="card-title mb-3">{{__('Manage Leave')}} </h1>
                 <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('leaves.create') : (Auth::user()->role->slug === 'administrator' ? route('admin.leaves.create') : route('hr.leaves.create') ) }}"
                     class="btn btn-primary">
                     <i class="fas fa-plus"></i>

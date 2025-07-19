@@ -40,12 +40,21 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request)
     {
         //
+         $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:employees',
+            // other fields
+        ]);
+
+
         $employee = Employee::create($request->all());
         if($employee) {
             $salary = new Salary($request->all());
             $employee->salary()->save($salary);
         }
-        return back()->with('success', 'Employee created successfully.');
+
+        return LaravelNotify::success('Employee added successfully!', 'Success');
+        // return back()->with('success', 'Employee created successfully.');
     }
 
     /**
