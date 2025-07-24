@@ -1,18 +1,18 @@
 @extends('layouts.admin')
 
 @section('title')
-    {{ __('Add New Role') }}
+{{ __('Add New Role') }}
 @endsection
 
 @section('header')
-  <h1 class="h3 mb-3">Dashboard</h1>
+<h1 class="h3 mb-3">Dashboard</h1>
 @endsection
 
 @section('content')
-  <section class="row">
+<section class="row">
     <div class="col-12 d-flex align-items-center justify-content-center">
       <div class="col-6">
-        <form action="{{  Auth::user()->role->slug === 'super-admin' ? route('roles.store') : '#' }}" method="post">
+        <form action="{{  Auth::user()->role->slug === 'super-admin' ? route('role.store')  }}" method="post">
           @csrf
           <div class="card flex-fill">
             <div class="card-header">
@@ -41,7 +41,7 @@
             <div class="card-footer">
               <div class="row">
                 <div class="col-6 d-grid">
-                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.index') : '#' }}" class="btn btn-outline-secondary" >
+                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.index', $role->id)  }}" class="btn btn-outline-secondary" >
                     <i class="align-middle me-1" data-feather="arrow-left"></i>
                     <span class="ps-1">{{ __('Discard') }}</span>
                   </a>
@@ -61,7 +61,7 @@
     {{-- <div class="col-5">
       @include('partials.error')
     </div> --}}
-  </section>
+</section>
 @endsection
 
 @section('script')

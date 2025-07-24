@@ -6,11 +6,10 @@
 
 @section('header')
   <div class="d-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3">{{ __('Daily attendance') }}</h1>
-    {{-- <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('attendance.create') : (Auth::user()->role->slug === 'administrator' ? route('admin.attendance.create') : route('moderator.attendance.create') ) }}" class="btn btn-primary">
+  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('attendance.create') : (Auth::user()->role->slug === 'administrator' ? route('admin.attendance.create') : route('moderator.attendance.create') ) }}" class="btn btn-primary">
       <i class="fas fa-plus"></i>
       <span class="ps-1">{{ __('Add new') }}</span>
-    </a> --}}
+    </a>
   </div>
 @endsection
 
@@ -46,10 +45,7 @@
                         {{ $date }}
                     </th>
   
-                @endforeach
-
-                
-  
+                @endforeach  
             </tr>
         </thead>
   
