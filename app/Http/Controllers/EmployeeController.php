@@ -52,9 +52,7 @@ class EmployeeController extends Controller
             $salary = new Salary($request->all());
             $employee->salary()->save($salary);
         }
-
-        return LaravelNotify::success('Employee added successfully!', 'Success');
-        // return back()->with('success', 'Employee created successfully.');
+        return back()->with('success', 'Employee created successfully.');
     }
 
     /**

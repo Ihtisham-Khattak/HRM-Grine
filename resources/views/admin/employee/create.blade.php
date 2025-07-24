@@ -86,7 +86,9 @@
                             </div>
                         </div>
 
+                        
                          <div class="card-footer">
+
                         <div class="d-flex flex-md-row flex-column gap-2">
 
                             <div class="col-md-6">

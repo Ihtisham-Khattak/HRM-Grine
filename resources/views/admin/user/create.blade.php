@@ -82,9 +82,6 @@
             </form>
         </div>
     </div>
-    {{-- <div class="col-5">
-      @include('partials.error')
-    </div> --}}
 </section>
 @endsection
 
