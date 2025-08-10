@@ -4,13 +4,9 @@
   {{ __('Edit Leave') }}
 @endsection
 
-@section('header')
-  <h1 class="h3 mb-3">Dashboard</h1>
-@endsection
-
 @section('content')
   <section class="row">
-    <div class="col-8">
+    <div class="col-lg-12 col-md-12 col-sm-12">
       <form method="POST" action="{{ Auth::user()->role->slug === 'super-admin' ? route('leaves.update', $leave->id) : ( Auth::user()->role->slug === 'administrator' ? route('admin.leaves.update', $leave->id) : route('hr.leaves.update', $leave->id) ) }}">
         {{-- <form method="POST" action="{{ route('admin.leaves.update', $leave->id) }}"> --}}
         @csrf

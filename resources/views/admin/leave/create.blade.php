@@ -4,13 +4,11 @@
   {{ __('Add Leave Records') }}
 @endsection
 
-@section('header')
-  <h1 class="h3 mb-3">Dashboard</h1>
-@endsection
 
 @section('content')
   <section class="row">
-    <div class="col-8">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      {{-- Adjust the action route based on user role --}}
       <form method="POST" action="{{ Auth::user()->role->slug === 'super-admin' ? route('leaves.store') : (Auth::user()->role->slug === 'administrator' ? route('admin.leaves.store') : route('hr.leaves.store') ) }}">
         @csrf
         <div class="card flex-fill">
