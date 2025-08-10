@@ -12,7 +12,7 @@
 <section class="row">
     <div class="col-12 d-flex align-items-center justify-content-center">
       <div class="col-6">
-        <form action="{{  Auth::user()->role->slug === 'super-admin' ? route('role.store')  }}" method="post">
+        <form action="{{  route('roles.store')  }}" method="post">
           @csrf
           <div class="card flex-fill">
             <div class="card-header">
@@ -21,27 +21,39 @@
             <div class="card-body py-0">
               <div class="row g-3">
                 <div class="col-12">
-                  <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('Role Title') }}" value="{{ old('title') }}" required />
+                  <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="{{ __('Role Title') }}" value="{{ old('title') }}" required />
+                  @error('title')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-12">
-                  <textarea name="description" class="form-control" id="description" cols="30" rows="10" placeholder="{{ __('Type details here ...') }}">{{ old('description') }}</textarea>
+                  <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" cols="30" rows="10" placeholder="{{ __('Type details here ...') }}">{{ old('description') }}</textarea>
+                  @error('description')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-12">
-                  <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Role Slug') }}" value="{{ old('slug') }}" />
+                  <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" id="slug" placeholder="{{ __('Role Slug') }}" value="{{ old('slug') }}" />
+                  @error('slug')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-12">
-                  <select name="status" class="form-control" id="status">
+                  <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
                     <option value="">{{ __('-- Choose Status --') }}</option>
-                    <option value="1">{{ __('Enable') }}</option>
-                    <option value="0">{{ __('Disable') }}</option>
+                    <option value="1" {{ old('status') === '1' ? 'selected' : '' }}>{{ __('Enable') }}</option>
+                    <option value="0" {{ old('status') === '0' ? 'selected' : '' }}>{{ __('Disable') }}</option>
                   </select>
+                  @error('status')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
               </div>
             </div>
             <div class="card-footer">
               <div class="row">
                 <div class="col-6 d-grid">
-                  <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('roles.index', $role->id)  }}" class="btn btn-outline-secondary" >
+                  <a href="{{ route('roles.index')  }}" class="btn btn-outline-secondary" >
                     <i class="align-middle me-1" data-feather="arrow-left"></i>
                     <span class="ps-1">{{ __('Discard') }}</span>
                   </a>

@@ -23,8 +23,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.roles.create');
+        $validate = 
+        $roles = Role::all();
+        return view('admin.roles.create', compact('roles'));
     }
 
     /**
@@ -32,9 +33,15 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        //
-        Role::create($request->all());
-        return back()->with('success', 'Role crated successfully');
+          // Validate input
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'slug' => 'required|string|max:255|unique:roles,slug',
+            'status' => 'required',
+        ]);
+        Role::create($validated);
+        return redirect('super/roles')->with('success', 'Role crated successfully');
     }
 
     /**
@@ -48,9 +55,9 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
-        //
+        $role = Role::findOrFail($id);
         return view('admin.roles.edit', compact('role'));
     }
 
@@ -61,7 +68,7 @@ class RoleController extends Controller
     {
         //
         $role->update($request->all());
-        return back()->with('success', 'Role updated successfully');
+        return redirect('super/roles')->with('success', 'Role updated successfully');
     }
 
     /**
@@ -71,6 +78,6 @@ class RoleController extends Controller
     {
         //
         $role->delete();
-        return back()->with('success', 'Role deleted successfully');
+        return redirect('super/roles')->with('success', 'Role deleted successfully');
     }
 }
