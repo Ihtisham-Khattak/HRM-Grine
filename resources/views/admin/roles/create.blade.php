@@ -2,13 +2,16 @@
 
 @section('title')
 {{ __('Add New Role') }}
+{{ __('Add New Role') }}
 @endsection
 
 @section('header')
 <h1 class="h3 mb-3">Dashboard</h1>
+<h1 class="h3 mb-3">Dashboard</h1>
 @endsection
 
 @section('content')
+<section class="row">
 <section class="row">
     <div class="col-12 d-flex align-items-center justify-content-center">
       <div class="col-6">
@@ -73,6 +76,7 @@
     {{-- <div class="col-5">
       @include('partials.error')
     </div> --}}
+</section>
 </section>
 @endsection
 
