@@ -1,38 +1,43 @@
-<!-- Success -->
-@if ($message = Session::get('success'))
-<div class="custom-alert alert alert-success alert-dismissible fade show p-4 bg-success" role="alert">
-    <strong>{{ $message }}</strong>
-  </div>
-  @endif
+@php
+    $alertStyle = 'padding: 1rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; border-radius: 0.25rem; font-size: 1rem;';
+    $alertColors = [
+        'primary' => 'color: #084298; background-color: #cfe2ff; border-color: #b6d4fe;',
+        'secondary' => 'color: #41464b; background-color: #e2e3e5; border-color: #d3d6d8;',
+        'success' => 'color: #0f5132; background-color: #d1e7dd; border-color: #badbcc;',
+        'danger' => 'color: #842029; background-color: #f8d7da; border-color: #f5c2c7;',
+        'warning' => 'color: #664d03; background-color: #fff3cd; border-color: #ffecb5;',
+        'info' => 'color: #055160; background-color: #cff4fc; border-color: #b6effb;',
+        'light' => 'color: #636464; background-color: #fefefe; border-color: #fdfdfe;',
+        'dark' => 'color: #141619; background-color: #d3d3d4; border-color: #bcbebf;',
+    ];
+@endphp
 
-<!-- Failed -->
-@if ($message = Session::get('error'))
-<div class="custom-alert alert alert-danger alert-dismissible fade show p-4 bg-danger" role="alert">
-    <strong>{{ $message }}</strong>
-  </div>
-@endif
+@foreach ($alertColors as $type => $colorStyle)
+    @if ($message = Session::get($type))
+        <div
+            class="alert alert-{{ $type }}"
+            id="flash-alert-{{ $type }}"
+            role="alert"
+            style="{{ $alertStyle }}{{ $colorStyle }}"
+        >
+            {{ $message }}
+        </div>
+    @endif
+@endforeach
 
-<!-- Warning -->
-@if ($message = Session::get('warning'))
-<div class="custom-alert alert alert-warning alert-dismissible fade show p-4 bg-warning" role="alert">
-    <strong>{{ $message }}</strong>
-  </div>
-@endif
-
-@if ($message = Session::get('info'))
-<div class="custom-alert alert alert-info alert-dismissible fade show p-4 bg-info" role="alert">
-    <strong>{{ $message }}</strong>
-  </div>
-@endif
-
-{{-- Auto-dismiss script --}}
 <script>
-    setTimeout(function () {
-        let alerts = document.querySelectorAll('.custom-alert');
-        alerts.forEach(alert => {
-            alert.style.transition = 'opacity 0.3s ease-in-out';
-            alert.style.opacity = '0';
-            setTimeout(() => alert.remove(), 300);
+    setTimeout(function() {
+        [
+            'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'
+        ].forEach(function(type) {
+            var alert = document.getElementById('flash-alert-' + type);
+            if (alert) {
+                alert.style.transition = 'opacity 0.5s';
+                alert.style.opacity = '0';
+                setTimeout(function() {
+                    alert.style.display = 'none';
+                }, 500);
+            }
         });
     }, 3000);
 </script>

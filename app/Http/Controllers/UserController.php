@@ -33,12 +33,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    //    $employee= User::create($request->all());
-    //      if($employee){
-    //         $salary = new Salary($request->all());
-    //         $employee->salary()->save($salary);
-    //      }
+        $validate = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'nullable|string|max:20|unique:users,phone',
+            'password' => 'required|string|min:8',
+            'cpass' => 'required|same:password',
+            'role_id' => 'required|exists:roles,id',
+        ], [
+            'cpass.same' => 'The confirm password does not match.',
+        ]);
+
         User::create($request->all());
         return back()->with('success', 'User Created Successfully');
     }
@@ -67,17 +72,31 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
-        // $employee = User::findorFail($id);
-        // $employee->update($request->all());
-        // $salary = $employee->salary?: new Salary();
-        // $salary->fill($request->all());
-        // $employee->salary()->save($salary);
-        // return back()->with('success', 'user updated successfully');
-        $user->update($request->all());
-        return back()->with('info', 'User Updated Successfully');
+        $user = User::findOrFail($id);
+
+        $validate = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20|unique:users,phone,' . $user->id,
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
+        $data = $request->only(['name', 'email', 'phone', 'role_id']);
+
+        // Update password only if provided
+        if ($request->filled('password')) {
+            $request->validate([
+                'password' => 'string|min:8',
+                'cpass' => 'required|same:password',
+            ], [
+                'cpass.same' => 'The confirm password does not match.',
+            ]);
+            $data['password'] = bcrypt($request->password);
+        }
+        $user->update($data);
+        return back()->with('success', 'User updated successfully');
     }
 
     /**
