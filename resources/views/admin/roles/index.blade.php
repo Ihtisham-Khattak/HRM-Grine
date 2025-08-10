@@ -2,9 +2,21 @@
 
 @section('title')
 {{ __('Manage Roles') }}
+{{ __('Manage Roles') }}
+@endsection
+
+@section('header')
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3">{{ __('Manage Roles') }}</h1>
+    <a href="{{route('roles.create') }}" class="btn btn-primary">
+      <i class="fas fa-plus"></i>
+      <span class="ps-1">{{ __('Add new') }}</span>
+    </a>
+  </div>
 @endsection
 
 @section('content')
+<section class="row">
 <section class="row">
     <div class="col-12">
         <div class="card flex-fill">
@@ -74,6 +86,7 @@
             </table>
         </div>
     </div>
+</section>
 </section>
 @endsection
 

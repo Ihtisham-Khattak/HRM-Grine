@@ -24,6 +24,19 @@
       left: 0;
       top: 0;
     }
+
+	.toggle-password {
+		position: absolute;
+		top: 50%;
+		right: 18px;
+		transform: translateY(-50%);
+		cursor: pointer;
+		color: #888;
+	}
+	.toggle-password:hover {
+	color: #333;
+	}
+
   </style>
   </head>
   <body>
