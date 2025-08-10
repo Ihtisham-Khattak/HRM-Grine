@@ -45,7 +45,7 @@ class UserController extends Controller
         ]);
 
         User::create($request->all());
-        return back()->with('success', 'User Created Successfully');
+        return redirect('/super/user')->with('success', 'User Created Successfully');
     }
 
     /**
@@ -83,20 +83,9 @@ class UserController extends Controller
             'role_id' => 'required|exists:roles,id',
         ]);
 
-        $data = $request->only(['name', 'email', 'phone', 'role_id']);
-
-        // Update password only if provided
-        if ($request->filled('password')) {
-            $request->validate([
-                'password' => 'string|min:8',
-                'cpass' => 'required|same:password',
-            ], [
-                'cpass.same' => 'The confirm password does not match.',
-            ]);
-            $data['password'] = bcrypt($request->password);
-        }
+        $data = $request->only(['name', 'email', 'phone', 'role_id','status']);
         $user->update($data);
-        return back()->with('success', 'User updated successfully');
+        return redirect('/super/user')->with('success', 'User updated successfully');
     }
 
     /**
@@ -106,6 +95,6 @@ class UserController extends Controller
     {
         //
         $user->delete();
-        return back()->with('error', 'User Deleted Successfully');
+        return redirect('/super/user')->with('error', 'User Deleted Successfully');
     }
 }
